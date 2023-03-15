@@ -8,7 +8,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -37,9 +39,14 @@ public class Cliente {
     @JoinColumn(name = "region_id")
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     private Region region;
+    @OneToMany(fetch =FetchType.LAZY, mappedBy = "cliente",cascade = CascadeType.ALL)
+    private List<Factura> facturas;
     //@PrePersist
     public void PrePersit(){
         this.createAt=new Date();
+    }
+    public Cliente(){
+        this.facturas= new ArrayList<>();
     }
 
 }
