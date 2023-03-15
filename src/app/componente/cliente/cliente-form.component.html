@@ -1,0 +1,89 @@
+<div class="card bg-light mb-3">
+  <div class="card-header">{{titulo}}</div>
+  <div class="card-body">
+    <ul class="alert alert-danger" *ngIf="errores">
+      <li *ngFor="let e of errores">
+        {{e}}
+      </li>
+    </ul>
+      <form>
+        <div class="form-group">
+          <button type="button" class="btn btn-primary" routerLink="/cliente"> Volver</button>
+
+
+      </div>
+
+          <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" name="nombre" class="form-control" id="nombre"
+              [(ngModel)]="cliente.nombre">
+              <div class="alert alert-danger" *ngIf="error?.nombre">
+                {{ error.nombre }}
+
+              </div>
+          </div>
+          <div class="form-group">
+              <label for="pagina">Apellido</label>
+              <input type="text" name="apellido" class="form-control" id="apellido"
+              [(ngModel)]="cliente.apellido">
+              <div class="alert alert-danger" *ngIf="error?.apellido">
+                {{ error.apellido}}
+
+              </div>
+          </div>
+          <div class="form-group ml-2">
+            <label for="pagina">email</label>
+            <input type="text" name="email" class="form-control" id="email"
+            [(ngModel)]="cliente.email">
+            <div class="alert alert-danger" *ngIf="error?.email">
+              {{ error.email }}
+
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="createAt">Fecha</label>
+          <input type="date" name="createAt" class="form-control" id="createAt"
+          [(ngModel)]="cliente.createAt">
+          <div class="alert alert-danger" *ngIf="error?.createAt">
+            {{ error.createAt}}
+
+          </div>
+      </div>
+      <div class="form-group">
+        <label for="">Regiones</label>
+        <select [compareWith]="compararRegion" name="region" class="form-control" id="region"
+        [(ngModel)]="cliente.region" style="width:500px;" >
+
+          <option *ngFor="let region of regiones" [ngValue]="region" >{{region.nombre}}</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="error?.region">
+          {{ error.region}}
+
+        </div>
+    </div>
+       <!--
+          <div class="form-group">
+              <label for="editorial" class="form-control">Editoriales</label>
+              <select [compareWith]="compararEditorial" name="editorial" id="Editorial" class="form-control"    [(ngModel)]="libro.editorial"  >
+
+                  <option value="">Seleccione Editorial</option>
+                  <option *ngFor="let editorial of editoriales" [ngValue]="editorial" >
+                      {{editorial.nombre}}
+                  </option>
+                </select>
+          </div>
+-->
+          <div class="form-group my-3">
+              <button type="button" class="btn btn-dark" (click)="crear()" *ngIf="!cliente.id"> Crear</button>
+
+
+          </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-dark" (click)="editar(cliente)" *ngIf="cliente.id"> Editar</button>
+
+
+        </div>
+      </form>
+  </div>
+</div>
+

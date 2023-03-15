@@ -3,14 +3,34 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HeaderComponent } from './componente/header/header.component';
+import { FooterComponent } from './componente/footer/footer.component';
+import { ClienteComponent } from './componente/cliente/cliente.component';
+import { HttpClientModule} from '@angular/common/http';
+import { ClienteFormComponent } from './componente/cliente/cliente-form.component';
+import { FormsModule } from '@angular/forms';
+import { PaginatorComponent } from './componente/paginator/paginator.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DetalleComponent } from './componente/cliente/detalle.component';
+import { LoginComponent } from './seguridadad/componente/login.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    ClienteComponent,
+    ClienteFormComponent,
+    PaginatorComponent,
+    DetalleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

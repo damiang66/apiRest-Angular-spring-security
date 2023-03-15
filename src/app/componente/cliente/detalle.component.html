@@ -1,0 +1,43 @@
+<div class="abrir-modal animation fadein" *ngIf="modal.modal">
+<div *ngIf="modal.modal" class="modal" tabindex="-1" style="display:block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{titulo}}</h5>
+        <button (click)="cerrarModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm">
+              <ul class="list-group text-dark">
+                <li class="list-group-item">{{cliente.nombre}}</li>
+                <li class="list-group-item">{{cliente.apellido}}</li>
+                <li class="list-group-item">{{cliente.email}}</li>
+                <li class="list-group-item">{{cliente.createAt | date:"fullDate"}}</li>
+                <li class="list-group-item">{{cliente.region.nombre}}</li>
+              </ul>
+              <div class="mb-3">
+                <label for="formFileSm" class="form-label"  >Seleccione  una imagen</label>
+                <input class="form-control form-control-sm" id="formFileSm" type="file" (change)="seleccionarFoto($event)">
+                <button *ngIf="seguridad.rol('ROLE_ADMIN')" class="btn btn-dark btn-sm my-2" [disabled]="!fotoSeleccionada" (click)="subirFoto()">subir</button>
+              </div>
+            </div>
+            <div class="col-sm">
+              <img *ngIf="cliente.foto" src="http://localhost:8080/api/upload/img/{{cliente.foto}}" class="img-thumbnail rounded">
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="cerrarModal()" >Close</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
