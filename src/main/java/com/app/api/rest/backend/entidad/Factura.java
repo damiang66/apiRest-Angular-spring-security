@@ -1,5 +1,6 @@
 package com.app.api.rest.backend.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -20,8 +21,10 @@ public class Factura {
     @Temporal(TemporalType.DATE)
     private Date createAT;
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties(value={"facturas","hibernateLazyInitializer","handler"})
     private Cliente cliente;
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @JoinColumn(name="factura_id")
     private List<ItemFactura> items;
     @PrePersist
@@ -37,5 +40,53 @@ public class Factura {
             total += item.getImporte();
         }
         return total;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getObservacion() {
+        return observacion;
+    }
+
+    public void setObservacion(String observacion) {
+        this.observacion = observacion;
+    }
+
+    public Date getCreateAT() {
+        return createAT;
+    }
+
+    public void setCreateAT(Date createAT) {
+        this.createAT = createAT;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<ItemFactura> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemFactura> items) {
+        this.items = items;
     }
 }
