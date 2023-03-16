@@ -13,6 +13,7 @@ import { PaginatorComponent } from './componente/paginator/paginator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetalleComponent } from './componente/cliente/detalle.component';
 import { LoginComponent } from './seguridadad/componente/login.component';
+import { FacturaDetalleComponent } from './facturas/componente/factura-detalle/factura-detalle.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LoginComponent } from './seguridadad/componente/login.component';
     ClienteFormComponent,
     PaginatorComponent,
     DetalleComponent,
-    LoginComponent
+    LoginComponent,
+    FacturaDetalleComponent
   ],
   imports: [
     BrowserModule,

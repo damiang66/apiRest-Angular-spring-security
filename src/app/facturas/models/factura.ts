@@ -8,6 +8,6 @@ export class Factura {
   items:Itemfactura[]=[];
   cliente:Cliente;
   total:number;
-  createAt:string;
+  createAT:string;
 
 }
