@@ -13,11 +13,13 @@
       <thead>
 
         <tr>
+          <th>cliente</th>
           <th>nombre</th>
           <th>apellido</th>
           <th>email</th>
           <th>fecha</th>
           <th>Region</th>
+          <th>crear Factura</th>
           <th *ngIf="serviceSeguridad.rol('ROLE_ADMIN')">editar</th>
           <th *ngIf="serviceSeguridad.rol('ROLE_ADMIN')">Eliminar</th>
         </tr>
@@ -37,6 +39,8 @@
           <td>{{ cliente.email }}</td>
           <td>{{ cliente.createAt | date:'dd-MMMM-yyyy' }}</td>
           <td>{{ cliente.region.nombre }}</td>
+          <td> <button [routerLink]="['/factura/form',cliente.id]" class="btn btn-success btn-sm">Crear Factura</button>
+
           <td>
             <button *ngIf="serviceSeguridad.rol('ROLE_ADMIN')" class="btn btn-primary btn-sm " [routerLink]="['/cliente/form',cliente.id]">Editar</button>
           </td>

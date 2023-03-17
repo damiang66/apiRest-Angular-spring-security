@@ -4,6 +4,7 @@ import { ClienteFormComponent } from './componente/cliente/cliente-form.componen
 import { ClienteComponent } from './componente/cliente/cliente.component';
 import { DetalleComponent } from './componente/cliente/detalle.component';
 import { FacturaDetalleComponent } from './facturas/componente/factura-detalle/factura-detalle.component';
+import { FacturasComponent } from './facturas/componente/factura-detalle/facturas.component';
 import { LoginComponent } from './seguridadad/componente/login.component';
 import { AuthGuard } from './seguridadad/guard/auth.guard';
 import { RolGuard } from './seguridadad/guard/rol.guard';
@@ -17,7 +18,9 @@ const routes: Routes = [
   {path:'cliente/form/:id',component:ClienteFormComponent,canActivate:[AuthGuard, RolGuard],data:{role:'ROLE_ADMIN'}},
   {path:'cliente/ver/:id',component:DetalleComponent,canActivate:[AuthGuard]},
   {path:'login',component:LoginComponent},
-  {path:'factura/:id',component:FacturaDetalleComponent}
+  {path:'factura/:id',component:FacturaDetalleComponent},
+  {path:'factura/form/:clienteId',component:FacturasComponent},
+
 ];
 
 @NgModule({

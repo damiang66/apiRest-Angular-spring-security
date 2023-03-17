@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetalleComponent } from './componente/cliente/detalle.component';
 import { LoginComponent } from './seguridadad/componente/login.component';
 import { FacturaDetalleComponent } from './facturas/componente/factura-detalle/factura-detalle.component';
+import { FacturasComponent } from './facturas/componente/factura-detalle/facturas.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FacturaDetalleComponent } from './facturas/componente/factura-detalle/f
     PaginatorComponent,
     DetalleComponent,
     LoginComponent,
-    FacturaDetalleComponent
+    FacturaDetalleComponent,
+    FacturasComponent
   ],
   imports: [
     BrowserModule,
