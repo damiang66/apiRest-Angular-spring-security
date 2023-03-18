@@ -8,14 +8,18 @@ import { FooterComponent } from './componente/footer/footer.component';
 import { ClienteComponent } from './componente/cliente/cliente.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ClienteFormComponent } from './componente/cliente/cliente-form.component';
-import { FormsModule } from '@angular/forms';
+
 import { PaginatorComponent } from './componente/paginator/paginator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetalleComponent } from './componente/cliente/detalle.component';
 import { LoginComponent } from './seguridadad/componente/login.component';
 import { FacturaDetalleComponent } from './facturas/componente/factura-detalle/factura-detalle.component';
 import { FacturasComponent } from './facturas/componente/factura-detalle/facturas.component';
-
+// para la auto busqueda con angular material
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,12 @@ import { FacturasComponent } from './facturas/componente/factura-detalle/factura
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
