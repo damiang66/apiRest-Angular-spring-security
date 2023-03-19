@@ -13,20 +13,20 @@
       <thead>
 
         <tr>
-          <th>cliente</th>
+          <th *ngIf="serviceSeguridad.rol('ROLE_USER')">cliente</th>
           <th>nombre</th>
           <th>apellido</th>
           <th>email</th>
           <th>fecha</th>
           <th>Region</th>
-          <th>crear Factura</th>
+          <th *ngIf="serviceSeguridad.rol('ROLE_ADMIN')">crear Factura</th>
           <th *ngIf="serviceSeguridad.rol('ROLE_ADMIN')">editar</th>
           <th *ngIf="serviceSeguridad.rol('ROLE_ADMIN')">Eliminar</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let cliente of clientes">
-          <td >
+          <td *ngIf="serviceSeguridad.rol('ROLE_USER')">
             <!-- [routerLink]="['/cliente/ver',cliente.id]"-->
             <img *ngIf="cliente.foto" (click)="abrirModel(cliente)"  src="http://localhost:8080/api/upload/img/{{cliente.foto}}" class="img-thumbnail rounded"
             style="width:64px; cursor: pointer; ">
@@ -39,7 +39,7 @@
           <td>{{ cliente.email }}</td>
           <td>{{ cliente.createAt | date:'dd-MMMM-yyyy' }}</td>
           <td>{{ cliente.region.nombre }}</td>
-          <td> <button [routerLink]="['/factura/form',cliente.id]" class="btn btn-success btn-sm">Crear Factura</button>
+          <td *ngIf="serviceSeguridad.rol('ROLE_ADMIN')"> <button [routerLink]="['/factura/form',cliente.id]" class="btn btn-success btn-sm">Crear Factura</button>
 
           <td>
             <button *ngIf="serviceSeguridad.rol('ROLE_ADMIN')" class="btn btn-primary btn-sm " [routerLink]="['/cliente/form',cliente.id]">Editar</button>

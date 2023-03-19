@@ -5,7 +5,7 @@
         <a [routerLink]="['/cliente']" href="" class="btn btn light btn xs">&laquo; Volver</a>
 
       </h4>
-      <form>
+      <form #facturaForm="ngForm">
 
         <div class="form-group row" *ngIf="factura.cliente">
           <label for="" class="col-sm-2 col-form-label" name="cliente">Cliente</label>
@@ -17,7 +17,10 @@
         <div class="form-group row">
         <label for="" class="col-sm-2 col-form-label" name="descripcion">Descripcion</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" name="descripcion" [(ngModel)]="factura.descripcion">
+          <input type="text" class="form-control" name="descripcion" [(ngModel)]="factura.descripcion" required #descripcion="ngModel">
+       <div class="alert alert-danger" *ngIf="descripcion.invalid && descripcion.touched || descripcion.invalid && facturaForm.submitted ">
+        La descripcion es obligatoria
+       </div>
         </div>
       </div>
 
@@ -43,9 +46,15 @@
           </mat-option>
         </mat-autocomplete>
       </mat-form-field>
+      <div class="alert alert-danger" *ngIf="autoCompletarControl.invalid  && facturaForm.submitted ">
+        La factura no puedo no tener productos
+       </div>
     </div>
   </div>
-  <table class="table table-striped table-hover table-sm">
+  <div class="alert alert-info my4" *ngIf="factura.items.length==0">
+    Esta factura no contiene productos asociados debe agreagar alguno
+  </div>
+  <table class="table table-striped table-hover table-sm" *ngIf="factura.items.length>0">
     <thead>
       <tr>
         <th>Producto</th>
@@ -65,10 +74,12 @@
       </tr>
     </tbody>
   </table>
+  <h5 *ngIf="factura.items.length>0" class="float-right">TOTAL DE LA FACTURA : <span>{{factura.calcularTotal()}}</span></h5>
+
       <div class="form-group row">
 
         <div class="col-sm-6">
-          <button class="btn btn-secondary">Crear factura</button>
+          <button class="btn btn-secondary" (click)="crearFactura(facturaForm)" [disabled]="facturaForm.form.invalid || factura.items.length==0">Crear factura</button>
         </div>
       </div>
       </form>

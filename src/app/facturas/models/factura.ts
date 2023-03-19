@@ -10,4 +10,13 @@ export class Factura {
   total:number;
   createAT:string;
 
+  calcularTotal():number{
+    this.total=0
+    this.items.forEach((item: Itemfactura)=>{
+      this.total= this.total + item.calcularImporte();
+    })
+    return this.total;
+
+  }
+
 }

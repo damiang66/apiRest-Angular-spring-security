@@ -18,8 +18,8 @@ const routes: Routes = [
   {path:'cliente/form/:id',component:ClienteFormComponent,canActivate:[AuthGuard, RolGuard],data:{role:'ROLE_ADMIN'}},
   {path:'cliente/ver/:id',component:DetalleComponent,canActivate:[AuthGuard]},
   {path:'login',component:LoginComponent},
-  {path:'factura/:id',component:FacturaDetalleComponent},
-  {path:'factura/form/:clienteId',component:FacturasComponent},
+  {path:'factura/:id',component:FacturaDetalleComponent ,canActivate:[AuthGuard,RolGuard], data:{role:'ROLE_USER'}},
+  {path:'factura/form/:clienteId',component:FacturasComponent,canActivate:[AuthGuard,RolGuard], data:{role:'ROLE_ADMIN'}},
 
 ];
 

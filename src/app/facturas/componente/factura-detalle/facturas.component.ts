@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Factura } from '../../models/factura';
 import { ServiceService } from '../../service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClienteService } from 'src/app/service/cliente.service';
 import { FormControl } from '@angular/forms';
 import { flatMap, map, mergeMap, Observable, startWith } from 'rxjs';
@@ -10,6 +10,7 @@ import { ProductoService } from '../../service/producto.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 import { Itemfactura } from './../../models/itemfactura';
+import  Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-facturas',
@@ -22,7 +23,7 @@ export class FacturasComponent implements OnInit{
   autoCompletarControl = new FormControl();
   productos: Producto[]=[];
   filtrarOpciones: Observable<Producto[]>;
-  constructor(private serviceFactura:ServiceService,private router: ActivatedRoute, private serviceCliente:ClienteService,private servicioProducto:ProductoService){}
+  constructor(private ruta:Router ,private serviceFactura:ServiceService,private router: ActivatedRoute, private serviceCliente:ClienteService,private servicioProducto:ProductoService){}
   ngOnInit(): void {
     this.router.paramMap.subscribe(parametro=>{
       let clienteId:number= +parametro.get('clienteId');
@@ -110,5 +111,18 @@ eliminarItem(id:number){
   this.factura.items =  this.factura.items.filter((item:Itemfactura)=>id !== item.producto.id)
 
 
+}
+crearFactura(facturaForm){
+  if(this.factura.items.length==0){
+    this.autoCompletarControl.setErrors({'invalid':true})
+  }
+  if(facturaForm.form.valid && this.factura.items.length>0){
+
+
+  this.serviceFactura.crear(this.factura).subscribe(factura=>{
+    Swal.fire(this.titulo, `Factura ${factura.descripcion} creada con exito`,'success')
+    this.ruta.navigate(['/cliente']);
+  })
+}
 }
 }

@@ -71,7 +71,7 @@ compararRegion(o1:Region,o2:Region){
 
 }
 editar(cliente:Cliente){
-
+this.cliente.facturas=null;
 
 this.service.editar(this.cliente).subscribe(data=>{
   console.log(data);

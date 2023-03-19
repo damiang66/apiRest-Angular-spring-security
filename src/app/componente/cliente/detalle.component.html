@@ -32,7 +32,7 @@
 
               </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="seguridad.rol('ROLE_ADMIN')">
               <td> <button [routerLink]="['/factura/form',cliente.id]" class="btn btn-success btn-sm">Crear Factura</button>
             </div>
             <div class="row">
@@ -47,7 +47,7 @@
                     <th>Fecha</th>
                     <th>Total</th>
                     <th>Detalle</th>
-                    <th>Acciones</th>
+                    <th *ngIf="seguridad.rol('ROLE_ADMIN')">Acciones</th>
 
 
                   </tr>
@@ -60,7 +60,7 @@
                   <td>{{factura.createAt}}</td>
                   <td>{{factura.total}}</td>
                   <td><button class="btn btn-dark btn-sm"[routerLink]="['/factura',factura.id]">ver</button></td>
-                  <td><button (click)="eliminarFactura(factura)" class="btn btn-dark btn-sm">Eliminar</button></td>
+                  <td *ngIf="seguridad.rol('ROLE_ADMIN')"><button (click)="eliminarFactura(factura)" class="btn btn-dark btn-sm">Eliminar</button></td>
 
 
 </tr>
