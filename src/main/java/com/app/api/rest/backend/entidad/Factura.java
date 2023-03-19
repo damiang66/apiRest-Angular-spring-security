@@ -21,7 +21,7 @@ public class Factura {
     @Temporal(TemporalType.DATE)
     private Date createAT;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value={"facturas","hibernateLazyInitializer","handler"})
+    @JsonIgnoreProperties(value={"facturas","hibernateLazyInitializer","handler"},allowSetters = true)
     private Cliente cliente;
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})

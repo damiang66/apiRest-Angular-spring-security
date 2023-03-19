@@ -53,7 +53,7 @@ public class ClienteControlador {
     public ResponseEntity<?>listarRegion(){
         return ResponseEntity.ok().body(service.findAllRegiones());
     }
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     @GetMapping("cliente/{id}")
     public ResponseEntity<?> mostrarPorId(@PathVariable Long id){
         Map<String, Object> respuesta = new HashMap<>();
