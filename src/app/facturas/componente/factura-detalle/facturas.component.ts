@@ -8,7 +8,8 @@ import { flatMap, map, mergeMap, Observable, startWith } from 'rxjs';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../service/producto.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Itemfactura } from '../../models/itemfactura';
+
+import { Itemfactura } from './../../models/itemfactura';
 
 @Component({
   selector: 'app-facturas',
@@ -56,11 +57,58 @@ mostrarNombre(producto?:Producto):string |undefined{
 }
 seleccionarProducto(event:MatAutocompleteSelectedEvent){
 let producto = event.option.value as Producto;
+if(this.existeItem(producto.id)){
+  this.incrementarCantidad(producto.id)
+}else{
 let nuevoItem = new Itemfactura();
 nuevoItem.producto=producto;
 this.factura.items.push(nuevoItem);
 this.autoCompletarControl.setValue("");
 event.option.focus();
 event.option.deselect();
+}
+}
+actualizarCantidad(id:number,event:any):void{
+let cantidad:number =event.target.value as number;
+if(cantidad==0){
+
+return this.eliminarItem(id);
+}
+
+
+this.factura.items= this.factura.items.map((i:Itemfactura)=>{
+  if(id===i.producto.id){
+    i.cantidad=cantidad;
+
+  }
+  return i;
+})
+
+
+}
+existeItem(id:number):boolean{
+let existe = false
+  this.factura.items.forEach((item:Itemfactura)=>{
+    if(id===item.producto.id){
+      existe=true;
+    }
+
+  });
+  return existe;
+
+}
+incrementarCantidad(id:number):void{
+  this.factura.items= this.factura.items.map((i:Itemfactura)=>{
+    if(id===i.producto.id){
+      i.cantidad++;
+
+    }
+    return i;
+  })
+}
+eliminarItem(id:number){
+  this.factura.items =  this.factura.items.filter((item:Itemfactura)=>id !== item.producto.id)
+
+
 }
 }
